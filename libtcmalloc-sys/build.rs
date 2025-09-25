@@ -342,6 +342,7 @@ fn compile(src_dir: impl AsRef<Path>) {
     ] {
         cc.flag_if_supported(flag);
     }
+    cc.link_lib_modifier("+whole-archive");
     cc.compile("tcmalloc");
 }
 
