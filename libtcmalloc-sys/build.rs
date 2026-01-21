@@ -282,7 +282,8 @@ fn compile(src_dir: impl AsRef<Path>) {
     cc.cpp(true);
     cc.std("c++17");
     cc.define("NOMINMAX", None);
-    cc.define("TCMALLOC_INTERNAL_METHODS_ONLY", None);
+    // we want malloc, free
+    // cc.define("TCMALLOC_INTERNAL_METHODS_ONLY", None);
     let page_size = PageSize::from_env().unwrap();
     cc.define(page_size.to_define(), None);
     if env::var_os("CARGO_FEATURE_DEPRECATED_PERTHREAD").is_some() {
