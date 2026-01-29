@@ -1,5 +1,5 @@
 use crate::TCMalloc;
-use libtcmalloc_sys::{NeedsProcessBackgroundActions, ProcessBackgroundActions};
+use libtcmalloc_sys::{NeedsProcessBackgroundActions, ProcessBackgroundActions, PrintStats, SetMaxPerCpuCacheSize};
 #[cfg(feature = "std")]
 use std::thread;
 
@@ -22,6 +22,16 @@ impl TCMalloc {
     #[inline]
     pub fn process_background_actions() {
         unsafe { ProcessBackgroundActions() };
+    }
+
+    #[inline]
+    pub fn print_stats() {
+        unsafe { PrintStats() };
+    }
+
+    #[inline]
+    pub fn set_max_per_cpu_cache_size(value: i32) {
+        unsafe { SetMaxPerCpuCacheSize(value) }
     }
 
     /// Runs housekeeping actions for the allocator in the background thread.
@@ -52,5 +62,11 @@ mod tests {
     #[cfg(feature = "std")]
     fn test_process_background_actions() {
         TCMalloc::process_background_actions_thread();
+    }
+
+    #[test]
+    fn test_stats() {
+        TCMalloc::set_max_per_cpu_cache_size(2000000);
+        TCMalloc::print_stats();
     }
 }

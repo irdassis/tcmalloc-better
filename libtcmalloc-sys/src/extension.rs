@@ -6,4 +6,8 @@ unsafe extern "C" {
     ///
     /// Should be run in the background thread. May return or may not return.
     pub fn ProcessBackgroundActions();
+
+    pub fn PrintStats();
+
+    pub fn SetMaxPerCpuCacheSize(value: i32);
 }
