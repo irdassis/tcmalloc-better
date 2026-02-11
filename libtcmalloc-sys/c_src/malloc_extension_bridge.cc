@@ -1,6 +1,7 @@
 #include <cstdio>
 
 #include "tcmalloc/malloc_extension.h"
+#include "absl/time/time.h"
 
 extern "C" {
     bool NeedsProcessBackgroundActions() {
@@ -18,5 +19,9 @@ extern "C" {
 
     void SetMaxPerCpuCacheSize(int32_t value) {
         tcmalloc::MallocExtension::SetMaxPerCpuCacheSize(value);
+    }
+
+    void SetBackgroundProcessSleepIntervalInSecs(int64_t value) {
+        tcmalloc::MallocExtension::SetBackgroundProcessSleepInterval(absl::Seconds(value));
     }
 }

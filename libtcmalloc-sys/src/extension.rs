@@ -10,4 +10,6 @@ unsafe extern "C" {
     pub fn PrintStats();
 
     pub fn SetMaxPerCpuCacheSize(value: i32);
+
+    pub fn SetBackgroundProcessSleepIntervalInSecs(value: i64);
 }
